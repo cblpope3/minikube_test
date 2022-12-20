@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -21,3 +19,12 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
+  deploy-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Publish to GitHub Packages Apache Maven
+          run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+          env:
+            GITHUB_TOKEN: ${{ github.token }}
