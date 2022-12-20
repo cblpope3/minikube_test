@@ -20,11 +20,18 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-  deploy-jar:
+  publish-jar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v3
-      - name: Publish to GitHub Packages Apache Maven
-          run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      - name: Publish jars
+          run: mvn --batch-mode deploy
           env:
-            GITHUB_TOKEN: ${{ github.token }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
