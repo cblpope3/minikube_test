@@ -5,11 +5,10 @@
 replicaCount: 1
 
 image:
-  registry: ghcr.io/cblpope3
-  repository: minikube_test
+  repository: cblpope3/minikube-test
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "sha-7d1c148"
+  tag: "develop"
 
 imagePullSecrets: []
 nameOverride: ""
