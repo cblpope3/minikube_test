@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/cblpope3/minikube_test:sha-7d1c148
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "minikube-helloworld"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
