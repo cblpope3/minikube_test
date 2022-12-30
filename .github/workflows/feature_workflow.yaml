@@ -27,7 +27,7 @@ jobs:
     with:
       image-tag: latest
     secrets:
-      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+      dockerhub-username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      dockerhub-token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
 
