@@ -21,62 +21,13 @@ jobs:
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 
-#  publish-snapshot-docker:
-#    needs: publish-snapshot-jar
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      packages: write
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      # https://github.com/docker/setup-qemu-action
-#      - name: Set up QEMU
-#        uses: docker/setup-qemu-action@v1
-#
-#      # https://github.com/docker/setup-buildx-action
-#      - name: Set up Docker Buildx
-#        id: buildx
-#        uses: docker/setup-buildx-action@v2
-#
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@v2
-#        with:
-#          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#
-##      - name: Extract metadata (tags, labels) for Docker
-##        id: meta
-##        uses: docker/metadata-action@v3
-##        with:
-##          # list of Docker images to use as base name for tags
-##          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-##          # Docker tags based on the following events/attributes
-##          tags: |
-##            type=schedule
-##            type=ref,event=branch
-##            type=ref,event=pr
-##            type=semver,pattern={{version}}
-##            type=semver,pattern={{major}}.{{minor}}
-##            type=semver,pattern={{major}}
-##            type=sha
-#
-#      - name: Build and push
-#        uses: docker/build-push-action@v3
-#        with:
-#          context: .
-#          file: ./Dockerfile
-#          platforms: linux/amd64,linux/arm64/v8
-#          push: true
-#          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/minikube-test:latest
-#
-#
-#      - name: Deploy
-#        uses: omegion/argocd-actions@v1
-#        with:
-#          address: "argocd.example.com"
-#          token: ${{ secrets.ARGOCD_TOKEN }}
-#          action: sync
-#          appName: "my-example-app"
+  publish-docker:
+    needs: publish-snapshot-jar
+    uses: ./.github/workflows/publish_dockerhub.yaml
+    with:
+      image-tag: latest
+    secrets:
+      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+
 
