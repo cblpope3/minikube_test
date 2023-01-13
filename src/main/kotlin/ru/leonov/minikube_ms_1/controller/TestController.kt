@@ -14,6 +14,6 @@ class TestController {
 
     @GetMapping("/test1")
     fun otherTestEndpoint(@RequestParam(required = false) message: String?): String {
-        return "ArgoCD ${message ?: "is worked"}!"
+        return "ArgoCD new ${message ?: "is worked"}!"
     }
 }
