@@ -3,24 +3,23 @@ name: Build and Test
 on:
   workflow_call:
     inputs:
-      argocd_address:
-        required: true
-        type: string
       argocd_application_name:
         required: true
         type: string
     secrets:
-      token:
+      argocd_token:
+        required: false
+      argocd_address:
         required: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
         uses: omegion/argocd-actions@v1
         with:
-          address: ${{ inputs.argocd_address }}
-          token: ${{ secrets.token }}
+          address: ${{ secrets.argocd_address }}
+          token: ${{ secrets.argocd_token }}
           action: sync
           appName: ${{ inputs.argocd_application_name }}
