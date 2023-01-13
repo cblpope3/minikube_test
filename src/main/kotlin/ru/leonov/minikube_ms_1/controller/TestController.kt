@@ -11,4 +11,9 @@ class TestController {
     fun testEndpoint(@RequestParam(required = false) message: String?): String {
         return "Hello, ${message ?: "world"}!"
     }
+
+    @GetMapping("/test1")
+    fun otherTestEndpoint(@RequestParam(required = false) message: String?): String {
+        return "ArgoCD ${message ?: "is worked"}!"
+    }
 }
