@@ -14,11 +14,11 @@ jobs:
   build:
     uses: ./.github/workflows/build_and_test.yaml
 
-  publish-jar:
-    needs: build
-    uses: ./.github/workflows/publish_maven.yaml
-    secrets:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+#  publish-jar:
+#    needs: build
+#    uses: ./.github/workflows/publish_maven.yaml
+#    secrets:
+#      github-token: ${{ secrets.GITHUB_TOKEN }}
 
   publish-docker:
     needs: publish-jar
@@ -29,11 +29,11 @@ jobs:
       dockerhub-username: ${{ secrets.DOCKER_HUB_USERNAME }}
       dockerhub-token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-  deploy-dev:
-      needs: publish-docker
-      uses: ./.github/workflows/deploy.yaml
-      with:
-        argocd_application_name: hello-world
-      secrets:
-        argocd_token: ${{ secrets.ARGOCD_TOKEN }}
-        argocd_address: ${{ secrets.ARGOCD_ADDRESS }}
+#  deploy-dev:
+#      needs: publish-docker
+#      uses: ./.github/workflows/deploy.yaml
+#      with:
+#        argocd_application_name: hello-world
+#      secrets:
+#        argocd_token: ${{ secrets.ARGOCD_TOKEN }}
+#        argocd_address: ${{ secrets.ARGOCD_ADDRESS }}
