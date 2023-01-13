@@ -29,4 +29,11 @@ jobs:
       dockerhub-username: ${{ secrets.DOCKER_HUB_USERNAME }}
       dockerhub-token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-
+  deploy-dev:
+      needs: publish-docker
+      uses: ./.github/workflows/deploy.yaml
+      with:
+        argocd_application_name: hello-world
+      secrets:
+        argocd_token: ${{ secrets.ARGOCD_TOKEN }}
+        argocd_address: ${{ secrets.ARGOCD_ADDRESS }}
