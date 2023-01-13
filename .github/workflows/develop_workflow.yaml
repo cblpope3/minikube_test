@@ -21,7 +21,7 @@ jobs:
 #      github-token: ${{ secrets.GITHUB_TOKEN }}
 
   publish-docker:
-    needs: publish-jar
+    needs: build
     uses: ./.github/workflows/publish_dockerhub.yaml
     with:
       image-tag: develop
